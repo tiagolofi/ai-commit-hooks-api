@@ -1,11 +1,43 @@
 # Compiled class file
 *.class
 
+# Enviroment
+.env
+
 # Log file
 *.log
 
 # BlueJ files
 *.ctxt
+
+# Visual Studio Code
+.vscode
+
+# IntelliJ
+.idea
+*.ipr
+*.iml
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# OSX
+.DS_Store
+
+# NetBeans
+nb-configuration.xml
+
+# Vim
+*.swp
+*.swo
+
+# patch
+*.orig
+*.rej
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -18,6 +50,13 @@
 *.zip
 *.tar.gz
 *.rar
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
