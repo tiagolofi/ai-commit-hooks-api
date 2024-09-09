@@ -3,12 +3,12 @@ package com.github.tiagolofi.openai.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequisicaoGPT4Mini {
+public class RequisicaoChatCompletions {
     
     public String model;
     public List<MessagePrompt> messages;
 
-    public RequisicaoGPT4Mini (Builder builder) {
+    public RequisicaoChatCompletions (Builder builder) {
         this.model = builder.model;
         this.messages = builder.messages;
     }
@@ -43,8 +43,8 @@ public class RequisicaoGPT4Mini {
             return this;
         }
 
-        public RequisicaoGPT4Mini build() {
-            return new RequisicaoGPT4Mini(this);
+        public RequisicaoChatCompletions build() {
+            return new RequisicaoChatCompletions(this);
         }
     }
 

@@ -4,8 +4,8 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.github.tiagolofi.openai.OpenAI;
-import com.github.tiagolofi.openai.modelos.RequisicaoGPT4Mini;
-import com.github.tiagolofi.openai.modelos.RespostaGPT4Mini;
+import com.github.tiagolofi.openai.modelos.RequisicaoChatCompletions;
+import com.github.tiagolofi.openai.modelos.RespostaChatCompletions;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -44,14 +44,14 @@ OUTPUT:
 type recommendation - description of changes in up to 10 words in portuguese
     """;
 
-    public RespostaGPT4Mini commitGpt(String gitDiff, String tokenConsumo) {
+    public RespostaChatCompletions commitGpt(String gitDiff) {
 
         String gitDiffMultiline = String.format("""
             %s        
             """, gitDiff
         );
 
-        RequisicaoGPT4Mini requisicaoGPT4Mini = RequisicaoGPT4Mini.builder()
+        RequisicaoChatCompletions requisicaoGPT4Mini = RequisicaoChatCompletions.builder()
             .setModel("gpt-4o-mini")
             .setMessage("system", CONTENT_SYSTEM)
             .setMessage("user", gitDiffMultiline)

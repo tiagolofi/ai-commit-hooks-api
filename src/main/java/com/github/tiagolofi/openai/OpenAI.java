@@ -3,8 +3,8 @@ package com.github.tiagolofi.openai;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.jboss.resteasy.reactive.RestHeader;
 
-import com.github.tiagolofi.openai.modelos.RequisicaoGPT4Mini;
-import com.github.tiagolofi.openai.modelos.RespostaGPT4Mini;
+import com.github.tiagolofi.openai.modelos.RequisicaoChatCompletions;
+import com.github.tiagolofi.openai.modelos.RespostaChatCompletions;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.Consumes;
@@ -19,8 +19,8 @@ import jakarta.ws.rs.core.MediaType;
 public interface OpenAI {
 
     @POST
-    RespostaGPT4Mini postGpt(
-        RequisicaoGPT4Mini requisicaoGPT4Mini,
+    RespostaChatCompletions postGpt(
+        RequisicaoChatCompletions requisicaoGPT4Mini,
         @RestHeader("Authorization") String apiKey
     );
 

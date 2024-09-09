@@ -73,9 +73,9 @@ public class Token extends PanacheMongoEntity {
             return this;
         }
     
-        public Builder setExpiresIn() {
+        public Builder setExpiresIn(int days) {
             long dataHora = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")).toEpochSecond();
-            this.expiresIn = dataHora + 2592000;
+            this.expiresIn = dataHora + (86400 * days);
             return this;
         }
     

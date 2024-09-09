@@ -25,14 +25,14 @@ public class TokenResource {
 
     @POST
     @Path("/novo")
-    public Response novo(@RestQuery String email) {
+    public Response novo(NovoToken novoToken) {
         Token token = Token.builder()
-            .setEmail(email)
+            .setEmail(novoToken.email)
             .setToken()
-            .setExpiresIn()
+            .setExpiresIn(novoToken.durationDays)
             .setBlocked(false)
             .setPending(true)
-            .setLimit(100)
+            .setLimit(novoToken.limit)
             .build();
         
         token.persist();
@@ -79,6 +79,12 @@ public class TokenResource {
         return Response.status(200)
             .entity(Mensagens.ATUALIZADO.getMensagem())
             .build();
+    }
+
+    public static class NovoToken {
+        public String email;
+        public int durationDays;
+        public int limit;
     }
     
 }

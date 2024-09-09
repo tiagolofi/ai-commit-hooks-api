@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RespostaGPT4Mini {
+public class RespostaChatCompletions {
     
     public String id;
     public String object;

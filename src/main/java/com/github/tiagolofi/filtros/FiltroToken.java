@@ -41,12 +41,20 @@ public class FiltroToken implements ContainerRequestFilter {
     
             long agora = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")).toEpochSecond();
     
-            if (token == null || token.blocked == true || token.pending == true) {
+            if (token == null) {
                 requestContext.abortWith(
                     Response.status(404)
                         .entity(Mensagens.TOKEN_INVALIDO.getMensagem())
                         .build()
                     ); 
+            }
+
+            if (token.blocked == true || token.pending == true) {
+                requestContext.abortWith(
+                    Response.status(401)
+                        .entity(Mensagens.NAO_AUTORIZADO.getMensagem())
+                        .build()
+                    );
             }
     
             if (token.limit < 1) {

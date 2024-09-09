@@ -2,7 +2,7 @@ package com.github.tiagolofi.rest;
 
 import org.jboss.resteasy.reactive.RestHeader;
 
-import com.github.tiagolofi.openai.modelos.RespostaGPT4Mini;
+import com.github.tiagolofi.openai.modelos.RespostaChatCompletions;
 import com.github.tiagolofi.service.AiCommitHookService;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -28,7 +28,7 @@ public class AiCommitHookResource {
     @POST
     @Path("/gpt-4o-mini")
     public RespostaGPT4oMini gpt4(String gitDiff) {
-        RespostaGPT4Mini resposta = service.commitGpt(gitDiff, tokenConsumo);
+        RespostaChatCompletions resposta = service.commitGpt(gitDiff);
         return new RespostaGPT4oMini(resposta.choices.getFirst().message.content);
     }
 
