@@ -1,2 +1,3 @@
 # ai-commit-hooks-api
-Serviço que gera análise de commits seguindo padrões de boas práticas
+
+Serviço que gera commits usando o ChatGPT a partir de padrões de boas práticas
