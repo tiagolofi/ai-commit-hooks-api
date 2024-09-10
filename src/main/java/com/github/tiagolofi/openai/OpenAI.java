@@ -6,6 +6,7 @@ import org.jboss.resteasy.reactive.RestHeader;
 import com.github.tiagolofi.openai.modelos.RequisicaoChatCompletions;
 import com.github.tiagolofi.openai.modelos.RespostaChatCompletions;
 
+import io.micrometer.core.annotation.Timed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 public interface OpenAI {
 
     @POST
+    @Timed(value = "openai", extraTags = {"endpoint", "chat-completions"}, percentiles = {0.5, 0.95, 0.99})
     RespostaChatCompletions postGpt(
         RequisicaoChatCompletions requisicaoGPT4Mini,
         @RestHeader("Authorization") String apiKey

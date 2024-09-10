@@ -3,13 +3,18 @@ package com.github.tiagolofi.openai.modelos;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RequisicaoChatCompletions {
     
     public String model;
+    @JsonProperty("max_tokens")
+    public int maxTokens;
     public List<MessagePrompt> messages;
 
     public RequisicaoChatCompletions (Builder builder) {
         this.model = builder.model;
+        this.maxTokens = builder.maxTokens;
         this.messages = builder.messages;
     }
 
@@ -31,10 +36,16 @@ public class RequisicaoChatCompletions {
 
     public static class Builder {
         public String model;
+        public int maxTokens;
         public List<MessagePrompt> messages = new ArrayList<>();
 
         public Builder setModel(String model) {
             this.model = model;
+            return this;
+        }
+
+        public Builder setMaxTokens(int maxTokens) {
+            this.maxTokens = maxTokens;
             return this;
         }
 

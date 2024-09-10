@@ -5,8 +5,9 @@ import org.jboss.resteasy.reactive.RestQuery;
 
 import com.github.tiagolofi.mensageria.Mensagem;
 import com.github.tiagolofi.mensageria.Mensagens;
-import com.github.tiagolofi.mongo.Token;
+import com.github.tiagolofi.mongo.Tokens;
 
+import io.micrometer.core.annotation.Timed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -18,15 +19,16 @@ import jakarta.ws.rs.core.Response;
 @Path("/token")
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
-public class TokenResource {
+public class TokensResource {
         
     @RestHeader("Token-Autorizacao")
     String tokenAutorizacao;
 
     @POST
     @Path("/novo")
+    @Timed(value = "token", extraTags = {"metodo", "novo"}, percentiles = {0.5, 0.95, 0.99})
     public Response novo(NovoToken novoToken) {
-        Token token = Token.builder()
+        Tokens token = Tokens.builder()
             .setEmail(novoToken.email)
             .setToken()
             .setExpiresIn(novoToken.durationDays)
@@ -44,9 +46,10 @@ public class TokenResource {
 
     @PUT
     @Path("/aprovar")
+    @Timed(value = "token", extraTags = {"metodo", "aprovar"}, percentiles = {0.5, 0.95, 0.99})
     public Response aprovar(@RestQuery String tokenPending) {
 
-        Token token = Token.getTokenByToken(tokenPending);
+        Tokens token = Tokens.getTokenByToken(tokenPending);
         token.aprovar();
         token.update();
 
@@ -57,9 +60,10 @@ public class TokenResource {
 
     @PUT
     @Path("/bloquear")
+    @Timed(value = "token", extraTags = {"metodo", "bloquear"}, percentiles = {0.5, 0.95, 0.99})
     public Response bloquear(@RestQuery String tokenBlock) {
 
-        Token token = Token.getTokenByToken(tokenBlock);
+        Tokens token = Tokens.getTokenByToken(tokenBlock);
         token.bloquear();
         token.update();
 
@@ -70,9 +74,10 @@ public class TokenResource {
 
     @PUT
     @Path("/desbloquear")
+    @Timed(value = "token", extraTags = {"metodo", "desbloquear"}, percentiles = {0.5, 0.95, 0.99})
     public Response desbloquear(@RestQuery String tokenBlock) {
 
-        Token token = Token.getTokenByToken(tokenBlock);
+        Tokens token = Tokens.getTokenByToken(tokenBlock);
         token.desbloquear();
         token.update();
 

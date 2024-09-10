@@ -41,7 +41,7 @@ cleanup - Commits of type cleanup are used to remove commented code, unnecessary
 remove - Commits of type remove indicate the deletion of obsolete or unused files, directories, or functionalities, reducing the project’s size and complexity and keeping it more organized.
 
 OUTPUT:
-type recommendation - description of changes in up to 10 words in portuguese
+type recommendation - description of changes up to 10 words in portuguese
     """;
 
     public RespostaChatCompletions commitGpt(String gitDiff) {
@@ -53,6 +53,7 @@ type recommendation - description of changes in up to 10 words in portuguese
 
         RequisicaoChatCompletions requisicaoGPT4Mini = RequisicaoChatCompletions.builder()
             .setModel("gpt-4o-mini")
+            .setMaxTokens(20)
             .setMessage("system", CONTENT_SYSTEM)
             .setMessage("user", gitDiffMultiline)
             .build();

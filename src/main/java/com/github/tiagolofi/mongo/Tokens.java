@@ -11,7 +11,7 @@ import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 
 @MongoEntity(collection = "tokens")
-public class Token extends PanacheMongoEntity {
+public class Tokens extends PanacheMongoEntity {
     
     public String email;
     public String token;
@@ -20,9 +20,9 @@ public class Token extends PanacheMongoEntity {
     public boolean pending;
     public int limit;
 
-    public Token() {}
+    public Tokens() {}
 
-    private Token(Builder builder) {
+    private Tokens(Builder builder) {
         this.email = builder.email;
         this.token = builder.token;
         this.expiresIn = builder.expiresIn;
@@ -35,11 +35,11 @@ public class Token extends PanacheMongoEntity {
         return new Builder();
     }
 
-    public static Token getTokenByEmail(String email) {
+    public static Tokens getTokenByEmail(String email) {
         return find("email", email).firstResult();
     }
 
-    public static Token getTokenByToken(String token) {
+    public static Tokens getTokenByToken(String token) {
         return find("token", token).firstResult();
     }
 
@@ -109,8 +109,8 @@ public class Token extends PanacheMongoEntity {
             return this;
         }
     
-        public Token build() {
-            return new Token(this);
+        public Tokens build() {
+            return new Tokens(this);
         }
 
     }

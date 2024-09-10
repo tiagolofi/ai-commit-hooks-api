@@ -4,7 +4,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import com.github.tiagolofi.mensageria.Mensagens;
-import com.github.tiagolofi.mongo.Token;
+import com.github.tiagolofi.mongo.Tokens;
 
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.Priorities;
@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class FiltroToken implements ContainerRequestFilter {
     
     @ConfigProperty(name = "TOKEN_AUTORIZACAO")
-    String AUTORIZACAO;
+    String autorizacao;
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
@@ -37,7 +37,7 @@ public class FiltroToken implements ContainerRequestFilter {
         if (paths.stream().noneMatch(path::contains)) {
             String tokenHeader = requestContext.getHeaderString("Token-Consumo");
 
-            Token token = Token.getTokenByToken(tokenHeader);
+            Tokens token = Tokens.getTokenByToken(tokenHeader);
     
             long agora = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")).toEpochSecond();
     
@@ -76,7 +76,7 @@ public class FiltroToken implements ContainerRequestFilter {
                     );
             }
         } else {
-            if (!tokenAutorizacao.equals(AUTORIZACAO)) {
+            if (!tokenAutorizacao.equals(autorizacao)) {
                 requestContext.abortWith(
                     Response.status(401)
                         .entity(Mensagens.NAO_AUTORIZADO.getMensagem())

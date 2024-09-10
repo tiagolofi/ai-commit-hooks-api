@@ -5,6 +5,7 @@ import org.jboss.resteasy.reactive.RestHeader;
 import com.github.tiagolofi.openai.modelos.RespostaChatCompletions;
 import com.github.tiagolofi.service.AiCommitHookService;
 
+import io.micrometer.core.annotation.Timed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -27,6 +28,7 @@ public class AiCommitHookResource {
 
     @POST
     @Path("/gpt-4o-mini")
+    @Timed(value = "commits", extraTags = {"modelo", "gpt-4o-mini"}, percentiles = {0.5, 0.95, 0.99})
     public RespostaGPT4oMini gpt4(String gitDiff) {
         RespostaChatCompletions resposta = service.commitGpt(gitDiff);
         return new RespostaGPT4oMini(resposta.choices.getFirst().message.content);
