@@ -3,6 +3,7 @@ package com.github.tiagolofi.rest;
 import org.jboss.resteasy.reactive.RestHeader;
 import org.jboss.resteasy.reactive.RestQuery;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.tiagolofi.mensageria.Mensagem;
 import com.github.tiagolofi.mensageria.Mensagens;
 import com.github.tiagolofi.mongo.Tokens;
@@ -34,7 +35,7 @@ public class TokensResource {
             .setExpiresIn(novoToken.durationDays)
             .setBlocked(false)
             .setPending(true)
-            .setLimit(novoToken.limit)
+            .setLimit(novoToken.limitRequest)
             .build();
         
         token.persist();
@@ -88,8 +89,10 @@ public class TokensResource {
 
     public static class NovoToken {
         public String email;
+        @JsonProperty("duration_days")
         public int durationDays;
-        public int limit;
+        @JsonProperty("limit_request")
+        public int limitRequest;
     }
     
 }
