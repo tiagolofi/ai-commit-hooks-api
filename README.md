@@ -27,3 +27,7 @@ mvn quarkus:dev
 
 1. Contribua escrevendo os testes e sugerindo pontos para refatoração, odeio escrever testes... 😭;
 2. Outros modelos da OpenAI serão incluídos e novos projetos serão gerados a partir deste.
+
+## Testes
+
+Este é um teste de commit manual.
